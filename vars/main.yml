@@ -1,0 +1,7 @@
+---
+solr_version: "6.6.1"
+solr_home: "/deploy/VAR/solr"
+solr_port: "8080"
+
+java_packages:
+  - java-1.8.0-openjdk.x86_64

@@ -1,0 +1,16 @@
+---
+dependencies:
+  - geerlingguy.java
+  - geerlingguy.solr
+
+galaxy_info:
+  author: Bitban
+  description: Apache Solr for BB3
+  company: "Bitban Tecnologies"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.0
+  platforms:
+    - name: EL
+      versions:
+      - 6
+      - 7
