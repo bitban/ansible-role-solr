@@ -1,0 +1,11 @@
+---
+
+- copy:
+    src: "{{solr_config_templates}}"
+    dest: "{{solr_home}}/data/"
+    owner: solr
+    group: solr
+
+- service:
+    name: solr
+    state: restarted
