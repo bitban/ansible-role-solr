@@ -6,6 +6,14 @@
     owner: solr
     group: solr
 
+- template:
+    src: "{{item.src}}"
+    dest: "{{solr_home}}/data/{{item.dest}}"
+    owner: solr
+    group: solr
+    mode: 0644
+  with_items: "{{solr_config_j2_templates}}"
+
 - service:
     name: solr
     state: restarted
