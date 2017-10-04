@@ -1,0 +1,10 @@
+---
+solr_version: "6.6.1"
+solr_home: "/deploy/VAR/solr"
+solr_port: "8080"
+solr_log_file_path: "/deploy/VAR/solr/solr.log"
+solr_service_name: solr
+solr_install_path: "/opt/{{ solr_service_name }}"
+
+java_packages:
+  - java-1.8.0-openjdk.x86_64
