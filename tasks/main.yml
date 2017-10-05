@@ -1,4 +1,9 @@
 ---
+- include_role:
+    name: geerlingguy.java
+
+- include_role:
+    name: geerlingguy.solr
 
 - copy:
     src: "{{solr_config_templates}}"

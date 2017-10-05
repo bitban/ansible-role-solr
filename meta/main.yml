@@ -1,8 +1,4 @@
 ---
-dependencies:
-  - geerlingguy.java
-  - geerlingguy.solr
-
 galaxy_info:
   author: Bitban
   description: Apache Solr for BB3
