@@ -1,0 +1,4 @@
+---
+- include_tasks: solr_tag.yml
+  tags:
+    - solr
