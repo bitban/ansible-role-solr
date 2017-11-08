@@ -8,3 +8,5 @@ solr_install_path: "/opt/{{ solr_service_name }}"
 
 java_packages:
   - java-1.8.0-openjdk.x86_64
+
+solr_cores: []
