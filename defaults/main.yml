@@ -1,2 +1,5 @@
 ---
 solr_config_j2_templates: []
+solr_config_replication_active: false
+solr_config_replication_master_url: false
+solr_config_replication_poll_interval: "00:00:10"
