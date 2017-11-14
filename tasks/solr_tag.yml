@@ -5,9 +5,26 @@
 - include_role:
     name: geerlingguy.solr
 
-- copy:
+- name: Add ansible_user to sudoers file
+  template:
+    src: templates/sudoers
+    dest: /etc/sudoers.d/solr
+    owner: root
+    mode: 0644
+
+- synchronize:
     src: "{{solr_config_templates}}"
     dest: "{{solr_home}}/data/"
+    recursive: yes
+
+- name: Remove ansible_user to sudoers file
+  file:
+    path: /etc/sudoers.d/solr
+    state: absent
+
+- file:
+    path: "{{solr_home}}/data/"
+    recurse: yes
     owner: solr
     group: solr
 
@@ -22,3 +39,11 @@
 - service:
     name: solr
     state: restarted
+
+# TODO mover esto a el rol de checkmk
+- template:
+    src: templates/check_mk_solr_plugin
+    dest: /usr/share/check-mk-agent/plugins/solr
+    owner: root
+    group: root
+    mode: 0644

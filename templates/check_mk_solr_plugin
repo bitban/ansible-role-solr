@@ -1,0 +1,30 @@
+#!/usr/bin/python
+# encoding: utf-8
+
+import urllib2, json
+
+print '<<<solr>>>'
+
+try:
+	urlpath= 'http://localhost:8080/solr/admin/cores?wt=json'
+	body = urllib2.urlopen(urlpath)
+	resp = json.load(body)
+
+	for core in resp['status'].items():
+		print core[1]['name'] + '/numDocs ' + str(core[1]['index']['numDocs'])
+		print core[1]['name'] + '/sizeInBytes ' + str(core[1]['index']['sizeInBytes'])
+
+        	urlpath= 'http://localhost:8080/solr/' + core[1]['name'] + '/admin/mbeans?stats=true&wt=json'
+	        body = urllib2.urlopen(urlpath)
+        	resp = json.load(body)
+
+		i = 3
+		if '/select' in resp['solr-mbeans'][7]:
+			i = 7
+		print core[1]['name'] + '/avgRequestsPerSecond ' + str(resp['solr-mbeans'][i]['/select']['stats']['avgRequestsPerSecond'])
+		print core[1]['name'] + '/avgTimePerRequest ' + str(resp['solr-mbeans'][i]['/select']['stats']['avgTimePerRequest'])
+		print core[1]['name'] + '/errors ' + str(resp['solr-mbeans'][i]['/select']['stats']['errors'])
+
+except Exception as e:
+	print(e)
+
