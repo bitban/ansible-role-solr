@@ -46,4 +46,4 @@
     dest: /usr/share/check-mk-agent/plugins/solr
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
