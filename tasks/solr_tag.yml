@@ -16,6 +16,7 @@
     src: "{{solr_config_templates}}"
     dest: "{{solr_home}}/data/"
     recursive: yes
+    rsync_path: "sudo -u solr rsync"
 
 - name: Remove ansible_user to sudoers file
   file:
