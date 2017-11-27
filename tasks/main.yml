@@ -1,4 +1,14 @@
 ---
-- include: solr_tag.yml
+- include_role:
+    name: geerlingguy.java
   tags:
     - solr
+
+- include_role:
+    name: geerlingguy.solr
+  tags:
+    - solr
+
+- include: tasks/solr-standalone_tag.yml
+  tags:
+    - solr-standalone

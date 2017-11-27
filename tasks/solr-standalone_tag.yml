@@ -1,10 +1,4 @@
 ---
-- include_role:
-    name: geerlingguy.java
-
-- include_role:
-    name: geerlingguy.solr
-
 - name: Add ansible_user to sudoers file
   template:
     src: templates/sudoers
