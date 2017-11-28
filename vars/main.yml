@@ -10,3 +10,7 @@ java_packages:
   - java-1.8.0-openjdk.x86_64
 
 solr_cores: []
+
+
+# zookeeper
+zookeeper_version: 3.4.11

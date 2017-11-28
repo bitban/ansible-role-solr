@@ -12,3 +12,7 @@
 - include: tasks/solr-standalone_tag.yml
   tags:
     - solr-standalone
+
+- include: tasks/solr-cloud_tag.yml
+  tags:
+    - solr-cloud
