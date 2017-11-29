@@ -1,0 +1,13 @@
+---
+- name: Copy solr.xml config in standalone version
+  template:
+    src: "templates/solr_standalone.xml.j2"
+    dest: "{{solr_home}}/data/solr.xml"
+    owner: solr
+    group: solr
+    mode: 0644
+  tags:
+    - solr-standalone
+
+- set_fact:
+    solr_cloud_mode: false

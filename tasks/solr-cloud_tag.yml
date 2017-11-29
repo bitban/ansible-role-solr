@@ -1,4 +1,12 @@
 ---
+- name: Copy solr.xml config in cloud version
+  template:
+    src: "templates/solr_cloud.xml.j2"
+    dest: "{{solr_home}}/data/solr.xml"
+    owner: solr
+    group: solr
+    mode: 0644
+
 - include_role:
     name: AnsibleShipyard.ansible-zookeeper
 
@@ -20,3 +28,6 @@
     dest: "{{zookeeper_dir}}/conf/zoo.cfg"
     owner: zookeeper
     mode: 0644
+
+- set_fact:
+    solr_cloud_mode: yes
