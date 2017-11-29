@@ -14,3 +14,5 @@ solr_cores: []
 
 # zookeeper
 zookeeper_version: 3.4.11
+zookeeper_debian_apt_install: false
+zookeeper_dir: "{{ zookeeper_debian_apt_install | ternary('/usr/share/zookeeper', '/opt/zookeeper-' + zookeeper_version) }}"

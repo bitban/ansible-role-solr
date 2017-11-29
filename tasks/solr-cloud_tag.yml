@@ -11,7 +11,7 @@
   with_items:
     - regexp: "^ZK_HOST="
       line: 'ZK_HOST="localhost:2181"'
-    - regexp: "^SOLR_PORT="
+    - regexp: "^SOLR_HOST="
       line: 'SOLR_HOST="localhost"'
 
 - name: Configure Zookeeper

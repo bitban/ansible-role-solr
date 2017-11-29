@@ -11,10 +11,30 @@
     - solr-standalone
     - solr-cloud
 
-- include: tasks/copy_solr_config.yml
+- name: Copy solr.xml config in standalone version
+  template:
+    src: "templates/solr_standalone.xml.j2"
+    dest: "{{solr_home}}/data/solr.xml"
+    owner: solr
+    group: solr
+    mode: 0644
   tags:
     - solr-standalone
+
+- name: Copy solr.xml config in cloud version
+  template:
+    src: "templates/solr_cloud.xml.j2"
+    dest: "{{solr_home}}/data/solr.xml"
+    owner: solr
+    group: solr
+    mode: 0644
+  tags:
     - solr-cloud
+
+#- include: tasks/copy_solr_config.yml
+#  tags:
+#    - solr-standalone
+#    - solr-cloud
 
 - include: tasks/solr-cloud_tag.yml
   tags:
