@@ -1,7 +1,7 @@
 ---
 - name: Add ansible_user to sudoers file
   template:
-    src: templates/sudoers
+    src: templates/sudoers.j2
     dest: /etc/sudoers.d/solr
     owner: root
     mode: 0644
@@ -29,15 +29,3 @@
     group: solr
     mode: 0644
   with_items: "{{solr_config_j2_templates}}"
-
-- service:
-    name: solr
-    state: restarted
-
-# TODO mover esto a el rol de checkmk
-- template:
-    src: templates/check_mk_solr_plugin
-    dest: /usr/share/check-mk-agent/plugins/solr
-    owner: root
-    group: root
-    mode: 0755

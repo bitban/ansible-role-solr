@@ -2,17 +2,30 @@
 - include_role:
     name: geerlingguy.java
   tags:
-    - solr
+    - solr-standalone
+    - solr-cloud
 
 - include_role:
     name: geerlingguy.solr
   tags:
-    - solr
+    - solr-standalone
+    - solr-cloud
 
-- include: tasks/solr-standalone_tag.yml
+- include: tasks/copy_solr_config.yml
   tags:
     - solr-standalone
+    - solr-cloud
 
 - include: tasks/solr-cloud_tag.yml
   tags:
     - solr-cloud
+
+# TODO mover esto a el rol de checkmk
+- template:
+    src: templates/check_mk_solr_plugin
+    dest: /usr/share/check-mk-agent/plugins/solr
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+    - checkmk

@@ -1,3 +1,22 @@
 ---
 - include_role:
     name: AnsibleShipyard.ansible-zookeeper
+
+- name: Add cloud config in /etc/default/solr.in.sh
+  lineinfile:
+    dest: "/etc/default/solr.in.sh"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - regexp: "^ZK_HOST="
+      line: 'ZK_HOST="localhost:2181"'
+    - regexp: "^SOLR_PORT="
+      line: 'SOLR_HOST="localhost"'
+
+- name: Configure Zookeeper
+  template:
+    src: templates/zoo.cfg.j2
+    dest: "{{zookeeper_dir}}/conf/zoo.cfg"
+    owner: zookeeper
+    mode: 0644
