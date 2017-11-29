@@ -19,10 +19,9 @@
   tags:
     - solr-cloud
 
-#- include: tasks/copy_solr_config.yml
-#  tags:
-#    - solr-standalone
-#    - solr-cloud
+- include: tasks/active_solr_core.yml
+  tags:
+    - solr-active-core
 
 # TODO mover esto a el rol de checkmk
 - template:

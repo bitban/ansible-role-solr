@@ -8,8 +8,9 @@
 
 - synchronize:
     src: "{{solr_config_templates}}"
-    dest: "{{solr_home}}/data/"
+    dest: "{{solr_home}}/"
     recursive: yes
+    delete: yes
 
 - name: Remove ansible_user to sudoers file
   file:
@@ -17,15 +18,7 @@
     state: absent
 
 - file:
-    path: "{{solr_home}}/data/"
+    path: "{{solr_home}}"
     recurse: yes
     owner: solr
     group: solr
-
-- template:
-    src: "{{item.src}}"
-    dest: "{{solr_home}}/data/{{item.dest}}"
-    owner: solr
-    group: solr
-    mode: 0644
-  with_items: "{{solr_config_j2_templates}}"
