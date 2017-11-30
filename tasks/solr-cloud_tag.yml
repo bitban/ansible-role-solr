@@ -29,5 +29,8 @@
     owner: zookeeper
     mode: 0644
 
-- set_fact:
-    solr_cloud_mode: yes
+- file:
+    path: "{{solr_home}}/solr_cloud_mode.flag"
+    owner: solr
+    group: solr
+    mode: 0644

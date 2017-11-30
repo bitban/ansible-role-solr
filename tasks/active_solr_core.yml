@@ -7,10 +7,11 @@
     mode: 0644
 
 - synchronize:
-    src: "{{solr_config_templates}}"
-    dest: "{{solr_home}}/"
+    src: "{{item.src}}"
+    dest: "{{solr_home}}/{{item.dest}}"
     recursive: yes
     delete: yes
+  with_items: "{{solr_config_templates_to_sync}}"
 
 - name: Remove ansible_user to sudoers file
   file:
@@ -22,3 +23,26 @@
     recurse: yes
     owner: solr
     group: solr
+
+- name: Create core directory
+  file:
+    path: "{{solr_home}}/data/{{solr_config_core_name}}"
+    state: directory
+    mode: 0755
+    owner: solr
+    group: solr
+
+- name: Copy core.properties file
+  template:
+    src: templates/core.properties_cloud.j2
+    dest: "{{solr_home}}/data/{{solr_config_core_name}}/core.properties"
+    owner: solr
+    mode: 0644
+
+- stat:
+    path: "{{solr_home}}/solr_cloud_mode.flag"
+  register: solr_cloud_mode
+
+- name: Active core in Zookeeper
+  command: bash -c "su - solr -c '{{solr_install_path}}/bin/solr zk upconfig -z 127.0.0.1:2181 -n {{solr_config_core_name}} -d {{solr_home}}/{{solr_config_core_path}}'"
+  when: solr_cloud_mode.stat.exists

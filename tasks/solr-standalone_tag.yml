@@ -8,6 +8,3 @@
     mode: 0644
   tags:
     - solr-standalone
-
-- set_fact:
-    solr_cloud_mode: false
