@@ -21,6 +21,8 @@
       line: 'ZK_HOST="localhost:2181"'
     - regexp: "^SOLR_HOST="
       line: 'SOLR_HOST="localhost"'
+    - regexp: "^SOLR_OPTS="
+      line: "SOLR_OPTS=\"{{solr_opts}}\""
 
 - name: Configure Zookeeper
   template:
