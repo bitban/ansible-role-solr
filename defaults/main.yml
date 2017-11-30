@@ -9,3 +9,4 @@ solr_config_replication_poll_interval: "00:00:10"
 solr_rsync_user_group: "home"
 solr_zookeeper_hosts:
   - localhost
+solr_opts: ""
