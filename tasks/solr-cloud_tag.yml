@@ -24,13 +24,6 @@
     - regexp: "^SOLR_OPTS="
       line: "SOLR_OPTS=\"{{solr_opts}}\""
 
-- name: Configure Zookeeper
-  template:
-    src: templates/zoo.cfg.j2
-    dest: "{{zookeeper_dir}}/conf/zoo.cfg"
-    owner: zookeeper
-    mode: 0644
-
 - copy:
     content: ""
     dest: "{{solr_home}}/solr_cloud_mode.flag"
