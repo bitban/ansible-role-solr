@@ -31,8 +31,10 @@
     owner: zookeeper
     mode: 0644
 
-- file:
-    path: "{{solr_home}}/solr_cloud_mode.flag"
+- copy:
+    content: ""
+    dest: "{{solr_home}}/solr_cloud_mode.flag"
+    force: no
     owner: solr
     group: solr
     mode: 0644
