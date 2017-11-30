@@ -44,5 +44,5 @@
   register: solr_cloud_mode
 
 - name: Active core in Zookeeper
-  command: bash -c "su - solr -c '{{solr_install_path}}/bin/solr zk upconfig -z 127.0.0.1:2181 -n {{solr_config_core_name}} -d {{solr_home}}/{{solr_config_core_path}}'"
+  command: bash -c "su - solr -c '{{solr_install_path}}/bin/solr zk upconfig -n {{solr_config_core_name}} -d {{solr_home}}/{{solr_config_core_path}}'"
   when: solr_cloud_mode.stat.exists
