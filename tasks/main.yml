@@ -17,6 +17,7 @@
 
 - include: tasks/solr-cloud_tag.yml
   tags:
+    - solr-zookeeper
     - solr-cloud
 
 - include: tasks/active_solr_core.yml

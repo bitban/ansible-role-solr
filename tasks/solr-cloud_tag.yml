@@ -10,6 +10,11 @@
 - include_role:
     name: AnsibleShipyard.ansible-zookeeper
 
+- set_fact: foo_item="{{ item.host }}:2181"
+  with_items: "{{zookeeper_hosts}}"
+  register: foo_result
+- set_fact: zk_hosts="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list | join(',') }}"
+
 - name: Add cloud config in /etc/default/solr.in.sh
   lineinfile:
     dest: "/etc/default/solr.in.sh"
@@ -18,11 +23,11 @@
     state: present
   with_items:
     - regexp: "^ZK_HOST="
-      line: 'ZK_HOST="localhost:2181"'
+      line: 'ZK_HOST="{{zk_hosts}}"'
     - regexp: "^SOLR_HOST="
-      line: 'SOLR_HOST="localhost"'
+      line: 'SOLR_HOST="{{inventory_hostname}}"'
     - regexp: "^SOLR_OPTS="
-      line: "SOLR_OPTS=\"{{solr_opts}}\""
+      line: 'SOLR_OPTS="{{solr_opts}}"'
 
 - copy:
     content: ""
