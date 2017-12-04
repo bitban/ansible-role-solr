@@ -24,9 +24,13 @@
     owner: solr
     group: solr
 
+- set_fact: server_id="{{ item.id }}"
+  with_items: "{{zookeeper_hosts}}"
+  when: item.host == inventory_hostname
+
 - name: Create core directory
   file:
-    path: "{{solr_home}}/data/{{solr_config_core_name}}"
+    path: "{{solr_home}}/data/{{solr_config_core_name}}_{{server_id}}"
     state: directory
     mode: 0755
     owner: solr
@@ -35,7 +39,7 @@
 - name: Copy core.properties file
   template:
     src: templates/core.properties_cloud.j2
-    dest: "{{solr_home}}/data/{{solr_config_core_name}}/core.properties"
+    dest: "{{solr_home}}/data/{{solr_config_core_name}}_{{server_id}}/core.properties"
     owner: solr
     mode: 0644
 
