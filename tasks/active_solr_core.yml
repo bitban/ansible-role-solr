@@ -1,4 +1,8 @@
 ---
+- stat:
+    path: "{{solr_home}}/solr_cloud_mode.flag"
+  register: solr_cloud_mode
+
 - name: Add ansible_user to sudoers file
   template:
     src: templates/sudoers.j2
@@ -42,10 +46,24 @@
     dest: "{{solr_home}}/data/{{solr_config_core_name}}_{{server_id}}/core.properties"
     owner: solr
     mode: 0644
+  when: solr_cloud_mode.stat.exists
 
-- stat:
-    path: "{{solr_home}}/solr_cloud_mode.flag"
-  register: solr_cloud_mode
+- name: Copy core.properties file
+  template:
+    src: templates/core.properties_standalone.j2
+    dest: "{{solr_home}}/data/{{solr_config_core_name}}_{{server_id}}/core.properties"
+    owner: solr
+    mode: 0644
+  when: not solr_cloud_mode.stat.exists
+
+- name: Create link config for solr core
+  file:
+    src: "{{solr_home}}/{{solr_config_core_path}}"
+    dest: "{{solr_home}}/data/{{solr_config_core_name}}_{{server_id}}/conf"
+    owner: solr
+    group: solr
+    state: link
+  when: not solr_cloud_mode.stat.exists
 
 - name: Active core in Zookeeper
   command: bash -c "su - solr -c '{{solr_install_path}}/bin/solr zk upconfig -n {{solr_config_core_name}} -d {{solr_home}}/{{solr_config_core_path}}'"
