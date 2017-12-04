@@ -29,6 +29,14 @@
     - regexp: "^SOLR_OPTS="
       line: 'SOLR_OPTS="{{solr_opts}}"'
 
+- name: Copy zookeeper init script
+  template:
+    src: "templates/zookeeper_init.sh.j2"
+    dest: "/etc/init.d/zookeeper"
+    owner: root
+    group: root
+    mode: 0755
+
 - copy:
     content: ""
     dest: "{{solr_home}}/solr_cloud_mode.flag"
