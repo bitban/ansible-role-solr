@@ -1,7 +1,7 @@
 ---
 solr_config_templates_to_sync: []
 solr_config_j2_templates: []
-solr_config_core_path: ""
+solr_config_core_path: "core_config"
 solr_config_core_name: ""
 solr_config_replication_active: false
 solr_config_replication_master_url: false
