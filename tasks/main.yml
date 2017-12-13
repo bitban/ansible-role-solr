@@ -1,4 +1,13 @@
 ---
+
+- name: Install libselinux-python, fixing geerlingguy.solr role
+  yum:
+    name: libselinux-python
+    state: latest
+  tags:
+    - solr-standalone
+    - solr-cloud
+
 - include_role:
     name: geerlingguy.java
   tags:
